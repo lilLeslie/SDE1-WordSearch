@@ -13,7 +13,7 @@
       <HBox alignment="CENTER" prefHeight="42.0" prefWidth="552.0" spacing="12.0">
          <children>
             <TextField fx:id="txtInput" prefHeight="26.0" prefWidth="486.0" />
-            <Button mnemonicParsing="false" text="Search" />
+            <Button onAction="#search" mnemonicParsing="false" text="Search" />
          </children>
       </HBox>
       <HBox alignment="CENTER_RIGHT" prefHeight="344.0" prefWidth="552.0" spacing="12.0">
@@ -31,8 +31,8 @@
                         <ListView fx:id="lvNWords" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" />
                      </children>
                   </HBox>
-                  <ListView prefHeight="200.0" prefWidth="200.0" />
-                  <Button mnemonicParsing="false" text="Clear history" />
+                  <ListView fx:id="lvHistory" prefHeight="200.0" prefWidth="200.0" />
+                  <Button onAction="#clearHistory" mnemonicParsing="false" text="Clear history" />
                </children>
             </VBox>
          </children>
