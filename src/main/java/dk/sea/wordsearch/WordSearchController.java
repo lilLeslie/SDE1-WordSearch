@@ -1,6 +1,7 @@
 package dk.sea.wordsearch;
 
-import bll.WordSearchLogic;
+import be.HistoryEntry;
+import bll.WordManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -8,48 +9,52 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class WordSearchController implements Initializable {
-    WordSearchLogic wordSearchLogic = new WordSearchLogic();
     @FXML
     private TextField txtInput;
     @FXML
     private ListView<String> lvAllWords;
     @FXML
-    private ListView<String> lvAWords;
+    private ListView<String> lvWordsA;
     @FXML
-    private ListView<String> lvNWords;
+    private ListView<String> lvWordsN;
     @FXML
-    private ListView<String> lvHistory;
+    private ListView<HistoryEntry> lvHistory;
+    @FXML
+    private Label lblTotalWordCount;
+    @FXML
+    private Label lblSearchResult;
+    WordSearchModel wordSearchModel;
+
+    public WordSearchController() throws IOException {
+        wordSearchModel = new WordSearchModel();
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        lvAllWords.setItems(wordSearchLogic.readFromAllWordsFile());
-        lvAWords.setItems(wordSearchLogic.filterWordsStartingWith("a"));
-        lvNWords.setItems(wordSearchLogic.filterWordsStartingWith("n"));
-        lvHistory.setItems(wordSearchLogic.readFromHistoryFile());
+        lvAllWords.setItems(wordSearchModel.getObsAllWords());
+        lvWordsA.setItems(wordSearchModel.getObsWordsA());
+        lvWordsN.setItems(wordSearchModel.getObsWordsN());
+        lvHistory.setItems(wordSearchModel.getObsHistory());
+        lblTotalWordCount.setText(lvAllWords.getItems().size()+"");
     }
 
 
     public void search(ActionEvent actionEvent) throws IOException {
-        if (txtInput.getText() != null) {
-            wordSearchLogic.search(txtInput.getText());
-            lvHistory.setItems(wordSearchLogic.readFromHistoryFile());
+        String query = txtInput.getText();
+        if (!query.isEmpty()) {
+            boolean isFound = wordSearchModel.search(query);
+            lvHistory.setItems(wordSearchModel.getObsHistory());
+            lblSearchResult.setText(query + (isFound ? " is found!" : " is NOT found!"));
         }
     }
 
-    public void clearHistory(ActionEvent actionEvent) throws IOException{
-        wordSearchLogic.clearFile();
-        lvHistory.setItems(wordSearchLogic.readFromHistoryFile());
-    }
-
-    private void update(){
-        lvHistory.setItems(wordSearchLogic.readFromHistoryFile());
-        txtInput.clear();
+    public void clearHistory(ActionEvent actionEvent) throws IOException {
+        wordSearchModel.clearHistory();
+        lvHistory.setItems(wordSearchModel.getObsHistory());
     }
 }

@@ -13,7 +13,7 @@
       <HBox alignment="CENTER" prefHeight="42.0" prefWidth="552.0" spacing="12.0">
          <children>
             <TextField fx:id="txtInput" prefHeight="26.0" prefWidth="486.0" />
-            <Button onAction="#search" mnemonicParsing="false" text="Search" />
+            <Button mnemonicParsing="false" onAction="#search" text="Search" />
          </children>
       </HBox>
       <HBox alignment="CENTER_RIGHT" prefHeight="344.0" prefWidth="552.0" spacing="12.0">
@@ -27,20 +27,30 @@
                <children>
                   <HBox prefHeight="130.0" prefWidth="398.0" spacing="12.0">
                      <children>
-                        <ListView fx:id="lvAWords" prefHeight="200.0" prefWidth="200.0" />
-                        <ListView fx:id="lvNWords" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" />
+                        <ListView fx:id="lvWordsA" prefHeight="200.0" prefWidth="200.0" />
+                        <ListView fx:id="lvWordsN" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" />
                      </children>
                   </HBox>
                   <ListView fx:id="lvHistory" prefHeight="200.0" prefWidth="200.0" />
-                  <Button onAction="#clearHistory" mnemonicParsing="false" text="Clear history" />
+                  <Button mnemonicParsing="false" onAction="#clearHistory" text="Clear history" />
                </children>
             </VBox>
          </children>
       </HBox>
       <HBox prefHeight="14.0" prefWidth="552.0">
          <children>
-            <Label text="Total word count: " />
-            <Label layoutX="10.0" layoutY="10.0" text="Search result: " />
+            <HBox prefHeight="18.0" prefWidth="144.0">
+               <children>
+                  <Label text="Total word count: " />
+                  <Label fx:id="lblTotalWordCount" />
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="Search result: " />
+                  <Label fx:id="lblSearchResult" />
+               </children>
+            </HBox>
          </children>
       </HBox>
    </children>
