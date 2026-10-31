@@ -1,10 +1,12 @@
 package dk.sea.wordsearch;
 
 import be.HistoryEntry;
+import be.WordStatistic;
 import bll.WordManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -41,6 +43,7 @@ public class WordSearchController implements Initializable {
         lvWordsN.setItems(wordSearchModel.getObsWordsN());
         lvHistory.setItems(wordSearchModel.getObsHistory());
         lblTotalWordCount.setText(lvAllWords.getItems().size() + "");
+        lvSetMouseClickedEvent(lvAllWords);
     }
 
 
@@ -69,5 +72,24 @@ public class WordSearchController implements Initializable {
     private void highlightWord(String query) {
         lvAllWords.scrollTo(query);
         lvAllWords.getSelectionModel().select(query);
+    }
+
+    private void lvSetMouseClickedEvent(ListView<String> lv) {
+        lv.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                String selectedWord = lv.getSelectionModel().getSelectedItem();
+                if (selectedWord != null) {
+                    showWordStatistic(wordSearchModel.getWordStatistics(selectedWord));
+                }
+            }
+        });
+    }
+
+    private void showWordStatistic(WordStatistic wordStatistic) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText("Statistics for \"" + wordStatistic.getWord() + "\"");
+        alert.setContentText(wordStatistic.toString());
+
+        alert.showAndWait();
     }
 }

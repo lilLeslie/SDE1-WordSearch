@@ -1,6 +1,7 @@
 package dk.sea.wordsearch;
 
 import be.HistoryEntry;
+import be.WordStatistic;
 import bll.WordManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -50,5 +51,9 @@ public class WordSearchModel {
     public void clearHistory() throws IOException {
         wordManager.clearHistory();
         obsHistory.clear(); // clear the observable list directly instead of reading through the layers?
+    }
+
+    public WordStatistic getWordStatistics(String word){
+        return wordManager.getWordStatistic(word);
     }
 }

@@ -1,6 +1,7 @@
 package bll;
 
 import be.HistoryEntry;
+import be.WordStatistic;
 import dal.HistoryDAO;
 import dal.WordDAO;
 
@@ -11,6 +12,7 @@ import java.util.Locale;
 
 public class WordManager {
     private static WordManager instance;
+    private WordAnalyzer wordAnalyzer;
     private List<String> allWords;
     private List<String> wordsA;
     private List<String> wordsN;
@@ -18,6 +20,7 @@ public class WordManager {
     private HistoryDAO historyDAO;
 
     private WordManager() {
+        wordAnalyzer = new WordAnalyzer();
         wordDAO = new WordDAO();
         historyDAO = new HistoryDAO();
         allWords = loadWords("C:\\Datamatiker\\1st semester\\SDE1\\W44 - External Data Sources I\\words.txt");
@@ -76,5 +79,9 @@ public class WordManager {
 
     public void clearHistory() throws IOException {
         historyDAO.clearHistory();
+    }
+
+    public WordStatistic getWordStatistic(String word){
+        return wordAnalyzer.analyze(word);
     }
 }
