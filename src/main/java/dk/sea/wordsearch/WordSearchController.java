@@ -48,13 +48,13 @@ public class WordSearchController implements Initializable {
         String query = txtInput.getText();
         if (!query.isEmpty()) {
             boolean isFound = wordSearchModel.search(query);
-            lvHistory.setItems(wordSearchModel.getObsHistory());
+//            lvHistory.setItems(wordSearchModel.getObsHistory()); Spørg Henrik
             lblSearchResult.setText(query + (isFound ? " is found!" : " is NOT found!"));
         }
     }
 
     public void clearHistory(ActionEvent actionEvent) throws IOException {
         wordSearchModel.clearHistory();
-        lvHistory.setItems(wordSearchModel.getObsHistory());
+//        lvHistory.setItems(wordSearchModel.getObsHistory());
     }
 }

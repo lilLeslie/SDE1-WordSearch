@@ -58,8 +58,8 @@ public class WordManager {
         return historyDAO.loadHistory();
     }
 
-    public void addHistoryEntry(String query, boolean found) throws IOException {
-        historyDAO.saveHistoryEntry(new HistoryEntry(query, found));
+    public void addHistoryEntry(HistoryEntry entry) throws IOException {
+        historyDAO.saveHistoryEntry(entry);
     }
 
     public void clearHistory() throws IOException {

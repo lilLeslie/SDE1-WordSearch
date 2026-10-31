@@ -4,6 +4,7 @@ import be.HistoryEntry;
 import bll.WordManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 
 import java.io.IOException;
 
@@ -40,13 +41,16 @@ public class WordSearchModel {
 
     public boolean search(String query) throws IOException {
         boolean wordFound = wordManager.searchWord(query);
-        wordManager.addHistoryEntry(query, wordFound);
-        obsHistory = FXCollections.observableList(wordManager.getHistory());
+        HistoryEntry entry = new HistoryEntry(query, wordFound);
+        wordManager.addHistoryEntry(entry); // add entry to file
+        obsHistory.add(entry); // add entry directly to the observable list for performance purposes??? Spørg Henrik
+        // obsHistory = FXCollections.observableList(wordManager.getHistory()); // versus getting the history from the history.txt file.
         return wordFound;
     }
 
     public void clearHistory() throws IOException {
         wordManager.clearHistory();
-        obsHistory = FXCollections.observableList(wordManager.getHistory());
+        obsHistory.clear(); // clear the observable list directly instead of reading through the layers?
+//        obsHistory = FXCollections.observableList(wordManager.getHistory());
     }
 }
