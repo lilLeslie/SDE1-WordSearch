@@ -6,6 +6,7 @@ import dal.WordDAO;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Locale;
 
 public class WordManager {
     private static WordManager instance;
@@ -46,12 +47,22 @@ public class WordManager {
         return wordsN;
     }
 
+    /**
+     * Filters allWords that start with {@code letter}
+     * @param letter Letter to filter by
+     * @return List of all words starting with {@code letter}
+     */
     public List<String> getWordsStartingWithChar(char letter) {
         return allWords.stream().filter(s -> s.startsWith(String.valueOf(letter))).toList();
     }
 
+    /**
+     * Checks if {@code query} exists in allWords
+     * @param query Word to search for in allWords
+     * @return true if word exists, else false
+     */
     public boolean searchWord(String query) {
-        return allWords.contains(query);
+        return allWords.contains(query.toLowerCase(Locale.ROOT));
     }
 
     public List<HistoryEntry> getHistory() {

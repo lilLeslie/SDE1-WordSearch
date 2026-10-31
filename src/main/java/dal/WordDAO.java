@@ -10,6 +10,11 @@ import java.util.List;
 import java.util.Set;
 
 public class WordDAO {
+    /**
+     * Reads all lines of {@code filePath}
+     * @param filePath Absolute path of words.txt file
+     * @return List of all words in the file
+     */
     public List<String> getAllWords(String filePath) {
         List<String> words = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
