@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="481.0" prefWidth="600.0" spacing="24.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.sea.wordsearch.WordSearchController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="481.0" prefWidth="600.0" spacing="24.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.sea.wordsearch.WordSearchController">
    <children>
       <HBox alignment="CENTER" prefHeight="42.0" prefWidth="552.0" spacing="12.0">
          <children>
@@ -16,7 +16,7 @@
             <Button mnemonicParsing="false" onAction="#search" text="Search" />
          </children>
       </HBox>
-      <HBox alignment="CENTER_RIGHT" prefHeight="344.0" prefWidth="552.0" spacing="12.0">
+      <HBox alignment="CENTER" prefHeight="344.0" prefWidth="552.0" spacing="12.0">
          <children>
             <VBox prefHeight="303.0" prefWidth="200.0">
                <children>
@@ -37,15 +37,15 @@
             </VBox>
          </children>
       </HBox>
-      <HBox prefHeight="14.0" prefWidth="552.0">
+      <HBox alignment="CENTER_LEFT" prefHeight="14.0" prefWidth="552.0">
          <children>
-            <HBox prefHeight="18.0" prefWidth="144.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="18.0" prefWidth="144.0">
                <children>
                   <Label text="Total word count: " />
                   <Label fx:id="lblTotalWordCount" />
                </children>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label text="Search result: " />
                   <Label fx:id="lblSearchResult" />

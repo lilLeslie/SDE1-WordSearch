@@ -40,7 +40,7 @@ public class WordSearchController implements Initializable {
         lvWordsA.setItems(wordSearchModel.getObsWordsA());
         lvWordsN.setItems(wordSearchModel.getObsWordsN());
         lvHistory.setItems(wordSearchModel.getObsHistory());
-        lblTotalWordCount.setText(lvAllWords.getItems().size()+"");
+        lblTotalWordCount.setText(lvAllWords.getItems().size() + "");
     }
 
 
@@ -48,13 +48,26 @@ public class WordSearchController implements Initializable {
         String query = txtInput.getText();
         if (!query.isEmpty()) {
             boolean isFound = wordSearchModel.search(query);
-//            lvHistory.setItems(wordSearchModel.getObsHistory()); Spørg Henrik
-            lblSearchResult.setText(query + (isFound ? " is found!" : " is NOT found!"));
+            showResult(query, isFound);
         }
     }
 
     public void clearHistory(ActionEvent actionEvent) throws IOException {
         wordSearchModel.clearHistory();
-//        lvHistory.setItems(wordSearchModel.getObsHistory());
+    }
+
+    private void showResult(String query, boolean isFound) {
+        if (isFound) {
+            highlightWord(query);
+            lblSearchResult.setText(query + " is found!");
+        } else {
+            lblSearchResult.setText(query + " is NOT found!");
+            lvAllWords.scrollTo(0);
+        }
+    }
+
+    private void highlightWord(String query) {
+        lvAllWords.scrollTo(query);
+        lvAllWords.getSelectionModel().select(query);
     }
 }

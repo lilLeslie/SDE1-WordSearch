@@ -5,6 +5,7 @@ import dal.HistoryDAO;
 import dal.WordDAO;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -62,7 +63,7 @@ public class WordManager {
      * @return true if word exists, else false
      */
     public boolean searchWord(String query) {
-        return allWords.contains(query.toLowerCase(Locale.ROOT));
+        return Collections.binarySearch(allWords, query) >= 0;
     }
 
     public List<HistoryEntry> getHistory() {

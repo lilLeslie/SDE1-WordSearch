@@ -40,17 +40,15 @@ public class WordSearchModel {
     }
 
     public boolean search(String query) throws IOException {
-        boolean wordFound = wordManager.searchWord(query);
-        HistoryEntry entry = new HistoryEntry(query, wordFound);
+        boolean isFound = wordManager.searchWord(query);
+        HistoryEntry entry = new HistoryEntry(query, isFound);
         wordManager.addHistoryEntry(entry); // add entry to file
         obsHistory.add(entry); // add entry directly to the observable list for performance purposes??? Spørg Henrik
-        // obsHistory = FXCollections.observableList(wordManager.getHistory()); // versus getting the history from the history.txt file.
-        return wordFound;
+        return isFound;
     }
 
     public void clearHistory() throws IOException {
         wordManager.clearHistory();
         obsHistory.clear(); // clear the observable list directly instead of reading through the layers?
-//        obsHistory = FXCollections.observableList(wordManager.getHistory());
     }
 }
