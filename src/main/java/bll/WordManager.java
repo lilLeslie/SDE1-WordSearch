@@ -8,18 +8,26 @@ import java.io.IOException;
 import java.util.List;
 
 public class WordManager {
+    private static WordManager instance;
     private List<String> allWords;
     private List<String> wordsA;
     private List<String> wordsN;
     private WordDAO wordDAO;
     private HistoryDAO historyDAO;
 
-    public WordManager() {
+    private WordManager() {
         wordDAO = new WordDAO();
         historyDAO = new HistoryDAO();
         allWords = loadWords("C:\\Datamatiker\\1st semester\\SDE1\\W44 - External Data Sources I\\words.txt");
         wordsA = getWordsStartingWithChar('a');
         wordsN = getWordsStartingWithChar('n');
+    }
+
+    public static WordManager getInstance(){
+        if (instance == null) {
+            instance = new WordManager();
+        }
+        return instance;
     }
 
     public List<String> loadWords(String filePath) {

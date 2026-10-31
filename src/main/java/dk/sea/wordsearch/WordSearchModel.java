@@ -15,7 +15,7 @@ public class WordSearchModel {
     private ObservableList<HistoryEntry> obsHistory;
 
     public WordSearchModel() {
-        wordManager = new WordManager();
+        wordManager = WordManager.getInstance();
         obsAllWords = FXCollections.observableList(wordManager.getAllWords());
         obsHistory = FXCollections.observableList(wordManager.getHistory());
         obsWordsA = FXCollections.observableList(wordManager.getWordsA());
